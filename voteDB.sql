@@ -1,3 +1,4 @@
+USE `votedb`;
 -- MariaDB dump 10.17  Distrib 10.4.11-MariaDB, for Win64 (AMD64)
 --
 -- Host: 127.0.0.1    Database: votedb
