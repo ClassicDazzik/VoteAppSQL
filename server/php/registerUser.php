@@ -22,7 +22,7 @@ try{
         );
     } else {
         $errorMsg = array(
-            'success' => 'Account succesfully created!'
+            'success' => 'Account successfully created!'
         );
     }
 } catch (PDOException $e) {
@@ -32,7 +32,7 @@ try{
         );
     } else {
         $errorMsg = array(
-            'error' => 'Something went wrong'
+            'error' => 'Something went wrong...'
         );
     }
 }

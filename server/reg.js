@@ -8,38 +8,33 @@ function registerNewUser(event){
     const password2 = document.forms['register']['password2'].value;
 
     if(username.length <= 0) {
-        errorWindow("No username inputted")
+        showMessage('error', "No username inputted.")
         return;
     }
 
     if(password.length <= 4) {
-        errorWindow("Password must be longer than 4 letters.")
+        showMessage('error', "Password must be longer than 4 letters.")
         return;
     }
 
     if(password.localeCompare(password2) != 0){
-        errorWindow("Passwords don't match.")
+        showMessage('error',"Passwords don't match.")
         return;
     }
 
     let ajax = new XMLHttpRequest();
     ajax.onload = function(){
-        const errorMsg = JSON.parse(this.responseText);
-        console.log(errorMsg);
-        if (errorMsg.hasOwnProperty('success')) {
-            alert(errorMsg.success)
+        const msgBox = JSON.parse(this.responseText);
+        console.log(msgBox);
+        if (msgBox.hasOwnProperty('success')) {
+            window.location.href = "login.php?type=success&notifBox=Account successfully created! You can now login.";
+            return;
         } else {
-            errorWindow(errorMsg.error);
+            showMessage('error',msgBox.error);
         }
     }
     ajax.open("POST", "server/php/registerUser.php", true);
     ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     ajax.send("username="+username+"&password="+password);
     console.log('Data send was succesful!');
-}
-
-function errorWindow(type, err){
-    let errorBox = document.getElementById("err");
-    errorBox.querySelector('p').innerHTML = err;
-    errorBox.classList.remove('d-none');
 }
