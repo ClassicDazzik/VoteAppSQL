@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php include_once 'layout/top.php'; ?>
 <?php include_once 'layout/nav.php'; ?>
 

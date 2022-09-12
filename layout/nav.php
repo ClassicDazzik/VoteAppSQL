@@ -23,6 +23,11 @@
           <li class="nav-item">
             <a class="nav-link" href="register.php">Register</a>
           </li>
+          <?php if (isset($_SESSION['logged_in'])): ?>
+          <li class="nav-item">
+            <a class="nav-link" href="newpoll.php">Create a Poll</a>
+          </li>
+          <?php endif;?> 
         </ul>
       </div>
     </div>
