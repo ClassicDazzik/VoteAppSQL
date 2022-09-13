@@ -21,7 +21,7 @@ if(!isset($_SESSION['logged_in'])){
     <legend>Create Poll</legend>
     <div class="form-group">
       <label for="Topic" class="col-sm-2 col-form-label">Topic</label>
-      <input name="topic" type="text" class="form-control" placeholder="topic">
+      <input name="topic" id="topic" type="text" class="form-control" placeholder="topic">
     </div>
     <div class="form-group">
       <label for="start" class="form-label mt-4">Start Time</label>
