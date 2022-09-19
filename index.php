@@ -9,12 +9,27 @@
     <?php endif; ?>
 </div>
 
-<div id="notifBox" class="alert alert-dismissible alert-success d-none">
-  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-  <h4 class="alert-heading">Message Box!</h4>
-  <p class="mb-0"></a></p>
-</div>
+<div class="container">
 
-<script src="js/common.js"></script>
+  <div id="notifBox" class="alert alert-dismissible alert-success d-none">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <h4 class="alert-heading">Message Box!</h4>
+    <p class="mb-0"></a></p>
+  </div>
+
+      
+<h2>Active Polls</h2>
+<button class="btn btn-info" onclick="showPolls('current')">Show active polls</button>
+<button class="btn btn-info" onclick="showPolls('old')">Show expired polls</button>
+<button class="btn btn-info" onclick="showPolls('new')">Show upcoming polls</button>
+<ul id="polls" class="list-group">
+
+</ul>
+
+
+
+</div>
+<script src="js/showPoll.js"></script>
+<script src="js/script.js"></script>
 
 <?php include_once 'layout/bottom.php'; ?>

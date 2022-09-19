@@ -99,7 +99,7 @@ function createNewPoll(event) {
         const msgBox = JSON.parse(this.responseText);
         console.log(msgBox);
         if (msgBox.hasOwnProperty('success')) {
-           alert('yes');
+           window.location.href = "index.php?type=success&msg=Your poll has been added!"
         } else {
             showMessage('error',msgBox.error);
         }
