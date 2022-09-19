@@ -2,23 +2,23 @@
 
 include_once '../SQLconnect.php';
 
-try{
+try {
     $stmt = $conn->prepare("SELECT id, topic, start, end, user_id FROM poll");
 
     if ($stmt->execute() == false){
-        $errorMsg = array(
-            'error' => 'Failed to retrieve polls'
+        $data = array(
+            'error' => 'Error occured!'
         );
     } else {
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $errorMsg = $result;
+        $data = $result;
     }
 } catch (PDOException $e) {
-    $errorMsg = array(
-        'error' => 'An error with database occured.'
-    )
+    $data = array(
+        'error' => 'Tapahtui joku virhe!!'
+    );
 }
 
 header("Content-type: application/json;charset=utf-8");
-echo json_encode($errorMsg);
+echo json_encode($data);

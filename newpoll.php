@@ -49,5 +49,5 @@ if(!isset($_SESSION['logged_in'])){
 </div>
 
 <script src="js/script.js"></script>
-<script src="js/poll.js"></script>
+<script src="server/poll.js"></script>
 <?php include_once 'layout/bottom.php'; ?>
