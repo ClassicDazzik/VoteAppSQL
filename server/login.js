@@ -21,7 +21,7 @@ function loginUser(event){
         const msgBox = JSON.parse(this.responseText);
 
         if (msgBox.hasOwnProperty('success')){
-            window.location.href = "index.php?type=success&notifbox=You have succesfully logged in."
+            window.location.href = "admin.php?type=success&notifbox=You have succesfully logged in."
             return; 
         } else {
             showMessage('error','Password does not match username or Username does not exist.')

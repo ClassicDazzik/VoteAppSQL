@@ -9,7 +9,7 @@ function getPolls(){
         data = JSON.parse(this.responseText);
         showPolls(data);
     }
-    ajax.open("GET","server/php/getPolls.php");
+    ajax.open("GET","server/php/getPolls.php?show_all");
     ajax.send();
 }
 

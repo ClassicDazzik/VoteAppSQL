@@ -6,7 +6,7 @@ if (pollParams.has('id')){
     getPollData(pollParams.get('id'));
 }
 
-document.getElementById('options').addEventListener('click', giveVote)
+document.getElementById('options').addEventListener('click', giveVote);
 
 function getPollData(id){
     let ajax = new XMLHttpRequest;
@@ -19,7 +19,7 @@ function getPollData(id){
 }
 
 function showPoll(data){
-    document.querySelector('h1').innerHTML = data[0].topic;
+    document.querySelector('h1').innerHTML = data.topic;
     const options = document.getElementById('options');
 
     data['options'].forEach(option => {

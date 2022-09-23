@@ -24,5 +24,5 @@ try {
 } catch (PDOException $e) {
     $data = array(
         'error' => 'Couldnt vote'
-    )
+    );
 }
