@@ -5,6 +5,8 @@ let optionCount = 0;
 
 document.getElementById('addOption').addEventListener('click', newOption);
 document.getElementById('removeOption').addEventListener('click', deleteLastOption);
+document.forms['editPoll'].addEventListener('submit', modifyPoll);
+
 
 if (pollParams.has('id')){
     getPollData(pollParams.get('id'));
@@ -132,4 +134,35 @@ function newOption(event){
 
     console.log(div);    
 
+}
+
+function modifyPoll(event){
+    event.preventDefault();
+
+    // Get data from form
+    let polldata = {};
+    polldata.id = document.forms['editPoll']['id'].value;
+    polldata.topic = document.forms['editPoll']['topic'].value;
+    polldata.start = document.forms['editPoll']['start'].value;
+    polldata.end = document.forms['editPoll']['end'].value;
+
+    // Get options
+    const options = [];
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(function(input){
+        if(input.name.indexOf('option') == 0){
+            options.push({id: input.dataset.optionsid, name: input.value})
+        }
+    })
+
+    polldata.options = options;
+
+    // Send edits to backend
+    let ajax = new XMLHttpRequest();
+    ajax.onload = function(){
+        let data = JSON.parse(this.responseText);
+    }
+    ajax.open("POST", "server/modifyPoll.php", true);
+    ajax.setRequestHeader("Content-Type", "application/json");
+    ajax.send(JSON.stringify(polldata));
 }
