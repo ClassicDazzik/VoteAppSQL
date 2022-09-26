@@ -26,11 +26,11 @@ if(!isset($_SESSION['logged_in'])){
     </div>
     <div class="form-group">
       <label for="start" class="form-label mt-4">Start Time</label>
-      <input name="start" type="datetime" class="form-control" id="start" placeholder="start">
+      <input name="start" type="datetime-local" class="form-control" id="start" placeholder="start">
     </div>
     <div class="form-group">
       <label for="end" class="form-label mt-4">End Time</label>
-      <input name="end" type="datetime" class="form-control" id="end" placeholder="end">
+      <input name="end" type="datetime-local" class="form-control" id="end" placeholder="end">
     </div>
 
     <h4>Options</h4> <button class="btn btn-success"id="addOption">Add Option</button>

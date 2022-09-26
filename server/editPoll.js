@@ -1,19 +1,21 @@
 //get id from query
 const pollQueryString = window.location.search;
 const pollParams = new URLSearchParams(pollQueryString);
-let optionCount = 0;
-
-document.getElementById('addOption').addEventListener('click', newOption);
-document.getElementById('removeOption').addEventListener('click', deleteLastOption);
-document.forms['editPoll'].addEventListener('submit', modifyPoll);
-
 
 if (pollParams.has('id')){
     getPollData(pollParams.get('id'));
 }
 
+let optionCount = 0;
+let toDelete = [];
+
+document.getElementById('addOption').addEventListener('click', newOption);
+document.getElementById('removeOption').addEventListener('click', deleteLastOption);
+document.forms['editPoll'].addEventListener('submit', modifyPoll);
+document.querySelector('fieldset').addEventListener('click', getFieldsetClick);
+
 // get data from db
-function getPolldata(id){
+function getPollData(id){
     let ajax = new XMLHttpRequest;
     ajax.onload = function(){
         data = JSON.parse(this.responseText);
@@ -71,8 +73,16 @@ function createOptionInput(count, name, id){
 
     input.value = name;
 
+    const deleteButton = document.createElement('button');
+    deleteButton.className = "btn btn-sm btn-danger float-right";
+
+    const deleteText = document.createTextNode('Delete');
+    deleteButton.appendChild(deleteText);
+    deleteButton.dataset.action = 'delete';
+
     div.appendChild(label);
     div.appendChild(input);
+    div.appendChild(deleteButton);
 
     return div; 
 }
@@ -156,13 +166,32 @@ function modifyPoll(event){
     })
 
     polldata.options = options;
+    polldata.todelete = toDelete;
 
     // Send edits to backend
     let ajax = new XMLHttpRequest();
     ajax.onload = function(){
         let data = JSON.parse(this.responseText);
+        if (data.hasOwnProperty('success')){
+            window.location.href = "admin.php?type=success&msg=Poll edited";
+        } else {
+            showMessage('error', data.error);
+        }
     }
     ajax.open("POST", "server/modifyPoll.php", true);
     ajax.setRequestHeader("Content-Type", "application/json");
     ajax.send(JSON.stringify(polldata));
+}
+
+function getFieldsetClick(event){
+    event.preventDefault();
+    let btn = event.target;
+    if (btn.dataset.action == 'delete'){
+        let div = btn.parentElement;
+        let input = div.querySelector('input');
+        let fieldset = div.parentElement;
+
+        toDelete.push({id: input.dataset.optionid});
+        fieldset.removeChild(div);
+    }
 }

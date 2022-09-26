@@ -79,7 +79,6 @@ function createNewPoll(event) {
         if (input.name.indexOf('option') == 0){
             options.push(input.value);
         }
-        /* console.log(options); */
     })
 
     // Checks that the topic and options arent empty.
