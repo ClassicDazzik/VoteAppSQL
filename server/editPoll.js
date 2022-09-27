@@ -171,14 +171,15 @@ function modifyPoll(event){
     // Send edits to backend
     let ajax = new XMLHttpRequest();
     ajax.onload = function(){
-        let data = JSON.parse(this.responseText);
+        console.log(this.responseText);
+        /* let data = JSON.parse(this.responseText); */
         if (data.hasOwnProperty('success')){
             window.location.href = "admin.php?type=success&msg=Poll edited";
         } else {
             showMessage('error', data.error);
         }
     }
-    ajax.open("POST", "server/modifyPoll.php", true);
+    ajax.open("POST", "server/php/modifyPoll.php", true);
     ajax.setRequestHeader("Content-Type", "application/json");
     ajax.send(JSON.stringify(polldata));
 }

@@ -12,7 +12,7 @@ $json = file_get_contents('php://input');
 $polldata = json_encode($json);
 $data = array();
 
-include_once 'pdo-connect.php';
+include_once '../SQLconnect.php';
 
 // Update Topic table
 try {
