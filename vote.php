@@ -12,6 +12,11 @@ $id = intval($_GET['id']);
 
 <div class="container">
     <h1></h1>
+    <div id="notifBox" class="alert alert-dismissible alert-success d-none">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4 class="alert-heading">Message Box!</h4>
+        <p class="mb-0"></a></p>
+    </div>
     <ul id="options" class="list-group">
     </ul>
 </div>

@@ -47,7 +47,12 @@ function giveVote(event){
     let ajax = new XMLHttpRequest();
     ajax.onload = function(){
         data = JSON.parse(this.responseText);
-        showPoll(data);
+        
+        if(data.hasOwnProperty('success')){
+            showMessage('success, data.success');
+        } else if(data.hasOwnProperty('warning')){
+            showMessage('warning, data.warning');
+        }
     }
     ajax.open("GET", "server/php/giveVote.php?id=" + id);
     ajax.send();

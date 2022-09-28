@@ -15,16 +15,10 @@ function showMessage(type, notifBox){
         msgBox.classList.remove('alert-warning');
         msgBox.classList.remove('alert-danger');
         msgBox.querySelector('h4').innerHTML = "Success!";
-    } else if(type == 'error') {
+    } else {
         msgBox.classList.add('alert-danger');
         msgBox.classList.remove('alert-success');
-        msgBox.classList.remove('alert-warning');
         msgBox.querySelector('h4').innerHTML = "An Error!";
-    } else if(type == 'warning') {
-        msgBox.classList.add('alert-warning');
-        msgBox.classList.remove('alert-success');
-        msgBox.classList.remove('alert-danger');
-        msgBox.querySelector('h4').innerHTML = "Warning!!";
     }
     msgBox.querySelector('p').innerHTML = notifBox;
     msgBox.classList.remove('d-none');
