@@ -19,7 +19,7 @@ function showPolls(type = 'current'){
 
     const now = new Date();
 
-    // console.log(data);
+    /* console.log(data); */
 
     data.forEach(poll => {
         // Process JSON data
@@ -33,6 +33,13 @@ function showPolls(type = 'current'){
             end = new Date(poll.end);
         }
 
+        // Show currently active polls
+        if (type == 'current') {
+            if ((start == false || start <= now) && (end == false || end >= now)) {
+                createPollLi(ul, poll.id, poll.topic);
+            }
+        }       
+
         // Show expired polls
         else if (type == 'old') {
             if (end < now && end != false) {
@@ -43,13 +50,6 @@ function showPolls(type = 'current'){
         // Show upcoming future polls
         else if (type == 'future') {
             if (start > now && start != false) {
-                createPollLi(ul, poll.id, poll.topic);
-            }
-        }
-
-        // Show currently active polls
-        if (type == 'current') {
-            if ((start == false || start <= now) && (end == false || end >= now)) {
                 createPollLi(ul, poll.id, poll.topic);
             }
         }

@@ -28,8 +28,8 @@ function getPollData(id){
 function populatePollForm(data){
     document.forms['editPoll']['id'].value = data.id;
     document.forms['editPoll']['topic'].value = data.topic;
-    document.forms['editPoll']['start'].value = data.start.replace(" ","t");
-    document.forms['editPoll']['end'].value = data.end.replace(" ","t");
+    document.forms['editPoll']['start'].value = data.start.replace(" ","T");
+    document.forms['editPoll']['end'].value = data.end.replace(" ","T");
     const target = document.querySelector('fieldset');
 
     data.options.forEach(function(option) {
@@ -161,7 +161,7 @@ function modifyPoll(event){
     const inputs = document.querySelectorAll('input');
     inputs.forEach(function(input){
         if(input.name.indexOf('option') == 0){
-            options.push({id: input.dataset.optionsid, name: input.value})
+            options.push({id: input.dataset.optionid, name: input.value});
         }
     })
 
@@ -171,8 +171,9 @@ function modifyPoll(event){
     // Send edits to backend
     let ajax = new XMLHttpRequest();
     ajax.onload = function(){
-        console.log(this.responseText);
-        /* let data = JSON.parse(this.responseText); */
+        console.log(polldata);
+        let data = JSON.parse(this.responseText);
+        console.log(data);
         if (data.hasOwnProperty('success')){
             window.location.href = "admin.php?type=success&msg=Poll edited";
         } else {

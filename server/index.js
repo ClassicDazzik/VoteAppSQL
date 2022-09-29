@@ -19,7 +19,7 @@ function showPolls(type = 'current'){
 
     const now = new Date();
 
-    console.log(data);
+    /* console.log(data); */
 
     data.forEach(poll => {
         // Process JSON data

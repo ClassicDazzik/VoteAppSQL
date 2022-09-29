@@ -18,7 +18,7 @@ if(!isset($_SESSION['logged_in'])){
 
 <form name="editPoll">
   <fieldset>
-    <legend>Create Poll</legend>
+    <legend>Edit Poll</legend>
     <div class="form-group">
       <input type="hidden" name="id" id="id">
       <label for="Topic" class="col-sm-2 col-form-label">Topic</label>

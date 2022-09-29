@@ -5,11 +5,14 @@ if(!isset($_SESSION['user_id'])){
     $data = array(
         'error' => 'Please log in...'
     );
+
+    header("Content-type: application/json;charset=utf-8");
+    echo json_encode($data);
     die();
 }
 
 $json = file_get_contents('php://input');
-$polldata = json_encode($json);
+$polldata = json_decode($json);
 $data = array();
 
 include_once '../SQLconnect.php';
@@ -19,11 +22,11 @@ try {
     $stmt = $conn->prepare("UPDATE poll SET topic = :topic, start = :start, end = :end WHERE id = :id");
     $stmt->bindParam(":topic", $polldata->topic);
     $stmt->bindParam(":start", $polldata->start);
-    $stmt->bindParam(":topic", $polldata->end);
-    $stmt->bindParam(":topic", $polldata->id);
+    $stmt->bindParam(":end", $polldata->end);
+    $stmt->bindParam(":id", $polldata->id);
 
     if($stmt->execute() == false){
-        $data['error'] = 'Some serverside error happened';
+        $data['error'] = 'Error modifying poll!';
     } else {
         $data['success'] = 'Poll edited.';
     }
@@ -41,13 +44,13 @@ try {
         } else {
             $stmt = $conn->prepare("INSERT INTO option (name, poll_id) VALUES (:name, :pollid)");
             $stmt->bindParam(":name", $option->name);
-            $stmt->bindParam(":id", $polldata->id);
+            $stmt->bindParam(":pollid", $polldata->id);
         }
         
         if($stmt->execute() == false){
             $data['error'] = 'Error modifying option!';
         } else {
-            $data['success'] = 'Option edit successful';
+            $data['success'] = 'Option edited.';
         }
     }
 } catch (PDOException $e){
